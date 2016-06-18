@@ -1,0 +1,11 @@
+
+[Unit]
+Description=ssh reverse tunnel for remote management
+
+[Service]
+ExecStart=/usr/bin/ssh -i /home/pi/.ssh/id_rsa -R {{phone_home_proxy_port}}:localhost:22 -N {{phone_home_proxy_user}}@{{phone_home_proxy_host}}
+ExecReload=/usr/bin/ssh -i /home/pi/.ssh/id_rsa -R {{phone_home_proxy_port}}:localhost:22 -N {{phone_home_proxy_user}}@{{phone_home_proxy_host}}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

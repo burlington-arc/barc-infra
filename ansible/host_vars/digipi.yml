@@ -1,0 +1,11 @@
+phone_home_proxy_host:  remote.stratuscom.com
+phone_home_proxy_user:  digipi
+phone_home_proxy_port:  14439
+
+aprs_objects:
+  - id: repeater
+    name: "444.825ON"
+    latitude: "{{ latitude }}"
+    longitude: "{{ longitude }}"
+    symbol: "/r"
+    comment: "T131 NET WED1930 MTG1STTH"

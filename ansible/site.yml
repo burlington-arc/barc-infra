@@ -1,0 +1,7 @@
+
+---
+# This playbook configures infrastructure for the Burlington Amateur Radio Club
+
+- hosts: repeater_site
+  roles:
+    - aprx_config
