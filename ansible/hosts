@@ -2,7 +2,7 @@
 # These are the machines at the repeater site.
 [repeater_site]
 digipi
-dstarpi
+compass
 
 [aprx-hosts]
 digipi
