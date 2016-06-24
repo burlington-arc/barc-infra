@@ -1,13 +1,8 @@
 # This role sets up a "phone_home" service that keeps an ssh tunnel open
 # to a central machine, so we can login remotely.
-# We assume that aprx is already installed and the configuration goes into
-# /etc/aprx.conf
 
 - name: Make sure we have the local systemd directory
   file: path=/usr/local/lib/systemd/system state=directory
 
 - name: Setup systemd service unit for phone-home
   template: src=phone-home.service dest=/usr/local/lib/systemd/system
-
-- name: Restart phone-home
-  systemd: daemon_reload=yes name="phone-home" state=restarted

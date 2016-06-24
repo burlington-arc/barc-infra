@@ -1,10 +1,13 @@
 
 # These are the machines at the repeater site.
 [repeater_site]
-digipi ansible_user='pi' phone_home_proxy_port=14439
+digipi
+dstarpi
+
+[aprx-hosts]
+digipi
 
 [repeater_site:vars]
 ansible_become=true
-ansible_user='centos'
 ansible_become_method='sudo'
 ansible_become_user='root'

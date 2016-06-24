@@ -1,6 +1,7 @@
 phone_home_proxy_host:  remote.stratuscom.com
 phone_home_proxy_user:  digipi
 phone_home_proxy_port:  14439
+ansible_user: 'pi'
 
 aprs_objects:
   - id: repeater
