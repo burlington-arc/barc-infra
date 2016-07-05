@@ -6,3 +6,6 @@
 
 - name: Setup systemd service unit for phone-home
   template: src=phone-home.service dest=/usr/local/lib/systemd/system
+
+- name: Enable the phone-home service
+  systemd: name=phone-home enabled=yes daemon_reload=yes

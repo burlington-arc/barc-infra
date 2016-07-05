@@ -5,3 +5,5 @@
 - hosts: aprx_hosts
   roles:
     - aprx_config
+
+- include: setup-ssh-users.yml

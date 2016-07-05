@@ -12,5 +12,4 @@
   template: src=aprx.conf dest=/etc/aprx.conf
 
 - name: Restart aprx
-  systemd: daemon_reload=yes name=aprx state=restarted
-  
+  systemd: daemon_reload=yes name=aprx enabled=yes state=restarted
