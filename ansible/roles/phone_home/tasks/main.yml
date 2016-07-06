@@ -7,5 +7,11 @@
 - name: Setup systemd service unit for phone-home
   template: src=phone-home.service dest=/usr/local/lib/systemd/system
 
+- name: Setup the known_hosts file for the remote system
+  template: src=public_keys/known_hosts dest=/etc/ssh/known_hosts owner=root mode="u=rw,g=r,o=r"
+
 - name: Enable the phone-home service
   systemd: name=phone-home enabled=yes daemon_reload=yes
+
+- name: Add a crontab to restart the phone-home service hourly
+  cron: name="phone-home-restart" special_time=hourly job="systemctl restart phone-home"
