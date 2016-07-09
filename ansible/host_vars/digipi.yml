@@ -10,9 +10,9 @@ aprs_objects:
     longitude: "{{ longitude }}"
     symbol: "/r"
     comment: "T131 NET WED1930 MTG1STTH"
-  - id: hamfest
-    name: "HFEST-09a"
-    latitude: "4330.55N"
-    longitude: "07952.62W"
-    symbol: "\\h"
-    comment: "146.52MHz BARC Ontario Hamfest. Sat Jul 9 9:00AM"
+  # - id: hamfest
+  #   name: "HFEST-09a"
+  #   latitude: "4330.55N"
+  #   longitude: "07952.62W"
+  #   symbol: "\\h"
+  #   comment: "146.52MHz BARC Ontario Hamfest. Sat Jul 9 9:00AM"
