@@ -7,6 +7,9 @@ compass
 [aprx_hosts]
 digipi
 
+[power_controllers]
+digipi
+
 [repeater_site:vars]
 ansible_become=true
 ansible_become_method='sudo'
