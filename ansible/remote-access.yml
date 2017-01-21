@@ -4,6 +4,6 @@
 # In this script, we setup the remote access or 'phone_home' capability.
 # So.. this playbook needs to be executed when you have local access.
 
-- hosts: repeater_site
+- hosts: remote_access
   roles:
     - phone_home
