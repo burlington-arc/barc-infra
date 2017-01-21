@@ -14,3 +14,9 @@ digipi
 ansible_become=true
 ansible_become_method='sudo'
 ansible_become_user='root'
+
+# These machines are remotely accessible and require public keys in authorized_keys
+[remote_access]
+digipi
+compass
+stn2217
