@@ -24,6 +24,10 @@ local network.
 
 7. Test the ssh connection.
 
+7. On the new pi, create a new ssh key
+
+    ssh-keygen -b 2048 -t rsa
+
 8. ssh into the pi and copy your public key to its 'authorized_keys' file under
 the 'pi' user, as follows:
 
