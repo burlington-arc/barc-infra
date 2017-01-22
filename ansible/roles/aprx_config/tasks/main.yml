@@ -8,6 +8,12 @@
 - name: Setup systemd service unit for aprx
   template: src=aprx.service dest=/usr/local/lib/systemd/system
 
+- name: Create APRX log directory
+  file:
+    path: /var/log/aprx
+    state: directory
+    mode: 0755
+
 - name: Create the aprx config file
   template: src=aprx.conf dest=/etc/aprx.conf
 

@@ -8,7 +8,7 @@
   template: src=phone-home.service dest=/usr/local/lib/systemd/system
 
 - name: Setup the known_hosts file for the remote system
-  template: src=public_keys/known_hosts dest=/etc/ssh/known_hosts owner=root mode="u=rw,g=r,o=r"
+  template: src=public_keys/known_hosts dest=/etc/ssh/ssh_known_hosts owner=root mode="u=rw,g=r,o=r"
 
 - name: Enable the phone-home service
   systemd: name=phone-home enabled=yes daemon_reload=yes

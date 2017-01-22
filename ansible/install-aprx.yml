@@ -1,0 +1,8 @@
+
+---
+# This playbook downloads, compiles and installs APRX
+
+- hosts: aprx_hosts
+  roles:
+    - aprx
+    - aprx_config

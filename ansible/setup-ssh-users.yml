@@ -1,7 +1,8 @@
 
 ---
 
-- hosts: repeater_site
+- hosts: remote_access
+  name: 'Load authorized_keys'
   tasks:
     # Copy the authorized_keys file to the remote user.
     - authorized_key: user={{ ansible_user }} key={{ lookup('file', item) }}

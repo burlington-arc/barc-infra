@@ -1,0 +1,4 @@
+phone_home_proxy_host:  remote.stratuscom.com
+phone_home_proxy_user:  stn2217
+phone_home_proxy_port:  14721
+ansible_user: 'root'

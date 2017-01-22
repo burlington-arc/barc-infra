@@ -4,11 +4,12 @@
 
 - hosts: aprx_hosts
   roles:
+    # This playbook just does the configuration.  Run install-aprx.yml to install it.
     - aprx_config
 
 - hosts: power_controllers
   tasks:
-    - name: Install the power cyle utility
+    - name: Install the power cycle utility
       pip: name='git+http://github.com/burlington-arc/power-cycle.git#egg=power-cycle'
 
 - include: setup-ssh-users.yml
