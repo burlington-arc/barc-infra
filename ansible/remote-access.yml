@@ -5,5 +5,18 @@
 # So.. this playbook needs to be executed when you have local access.
 
 - hosts: remote_access
+  name: 'Setup phone_home service'
   roles:
     - phone_home
+
+- include: setup-ssh-users.yml
+
+- name: Setup pip for installing python packages
+  hosts: remote_access
+  tasks:
+    - include: install-pip.yml
+
+- name: Setup git
+  hosts: remote_access
+  tasks:
+    - apt: name=git state=present

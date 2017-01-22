@@ -3,12 +3,15 @@
 [repeater_site]
 digipi
 compass
+barcpi003
 
 [aprx_hosts]
 digipi
+barcpi003
 
 [power_controllers]
 digipi
+barcpi003
 
 [repeater_site:vars]
 ansible_become=true
@@ -20,3 +23,4 @@ ansible_become_user='root'
 digipi
 compass
 stn2217
+barcpi003
