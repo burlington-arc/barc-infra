@@ -10,6 +10,9 @@
 - hosts: power_controllers
   tasks:
     - name: Install the power cycle utility
-      pip: name='git+http://github.com/burlington-arc/power-cycle.git#egg=power-cycle'
+      pip:
+        name: 'git+http://github.com/burlington-arc/power-cycle.git#egg=power-cycle'
+        editable: false
+
 
 - include: setup-ssh-users.yml
