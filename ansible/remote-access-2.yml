@@ -1,0 +1,12 @@
+
+---
+# This playbook configures infrastructure for the Burlington Amateur Radio Club
+# In this script, we setup the remote access or 'phone_home' capability.
+# So.. this playbook needs to be executed when you have local access.
+
+- hosts: remote_access
+  name: 'Setup phone_home_2 service'
+  roles:
+    - phone_home_2
+
+- include: setup-ssh-users.yml

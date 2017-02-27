@@ -1,16 +1,13 @@
 
 # These are the machines at the repeater site.
 [repeater_site]
-digipi
 compass
 barcpi003
 
 [aprx_hosts]
-digipi
 barcpi003
 
 [power_controllers]
-digipi
 barcpi003
 
 [repeater_site:vars]
@@ -20,7 +17,6 @@ ansible_become_user='root'
 
 # These machines are remotely accessible and require public keys in authorized_keys
 [remote_access]
-digipi
 compass
 stn2217
 barcpi003

@@ -1,0 +1,17 @@
+# This role sets up a "phone_home" service that keeps an ssh tunnel open
+# to a central machine, so we can login remotely.
+
+- name: Make sure we have the local systemd directory
+  file: path=/usr/local/lib/systemd/system state=directory
+
+- name: Setup systemd service unit for phone-home-2
+  template: src=phone-home-2.service dest=/usr/local/lib/systemd/system
+
+- name: Setup the known_hosts file for the remote system
+  template: src=public_keys/known_hosts dest=/etc/ssh/ssh_known_hosts owner=root mode="u=rw,g=r,o=r"
+
+- name: Enable the phone-home service
+  systemd: name=phone-home-2 enabled=yes daemon_reload=yes
+
+- name: Add a crontab to restart the phone-home service hourly
+  cron: name="phone-home-2-restart" special_time=hourly job="systemctl restart phone-home-2"

@@ -1,6 +1,7 @@
-phone_home_proxy_host:  remote.stratuscom.com
 phone_home_proxy_user:  digipi
 phone_home_proxy_port:  14439
+phone_home_2_proxy_user:  pi
+phone_home_2_proxy_port:  14439
 ansible_user: 'pi'
 ansible_become: true
 ansible_become_method: 'sudo'
