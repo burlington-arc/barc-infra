@@ -19,6 +19,6 @@
         name: power-cycle-router
         hour: 0
         minute: 10
-        job: 'power-cycle router 10 --comment "Nightly router restart"'
+        job: '/usr/local/bin/power-cycle router 10 --comment "Nightly router restart"'
 
 - include: setup-ssh-users.yml
