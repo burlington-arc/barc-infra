@@ -1,0 +1,6 @@
+---
+# defaults file for share_tnc
+
+serial_port:  /dev/ttyUSB0
+tcp_port: 8001
+baud: 1200

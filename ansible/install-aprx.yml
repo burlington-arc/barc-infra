@@ -5,4 +5,5 @@
 - hosts: aprx_hosts
   roles:
     - aprx
+    - share-tnc baud=9600
     - aprx_config

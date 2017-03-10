@@ -1,0 +1,13 @@
+---
+# tasks file for share_tnc
+- name: Install share-tnc node module
+  shell: npm install -g --unsafe-perm share-tnc
+    
+- name: Make sure we have the local systemd directory
+  file: path=/usr/local/lib/systemd/system state=directory
+
+- name: Setup systemd service unit for share-tnc
+  template: src=share-tnc.service dest=/usr/local/lib/systemd/system
+
+- name: Enable the share-tnc service
+  systemd: name=share-tnc enabled=yes daemon_reload=yes
