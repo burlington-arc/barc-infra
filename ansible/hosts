@@ -20,3 +20,6 @@ ansible_become_user='root'
 compass
 stn2217
 barcpi003
+
+[gateway]
+barc-gateway

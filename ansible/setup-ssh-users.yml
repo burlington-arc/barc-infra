@@ -8,3 +8,11 @@
     - authorized_key: user={{ ansible_user }} key={{ lookup('file', item) }}
       with_fileglob:
         - public_keys/*.pub
+
+- hosts: gateway
+  name: 'Load authorized_keys to gateway group'
+  tasks:
+    # Copy the authorized_keys file to the remote user.
+    - authorized_key: user={{ ansible_user }} key={{ lookup('file', item) }}
+      with_fileglob:
+        - public_keys/*.pub
