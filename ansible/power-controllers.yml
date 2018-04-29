@@ -1,0 +1,15 @@
+
+---
+# This playbook configures infrastructure for the Burlington Amateur Radio Club
+# In this script, we setup the power controllers (currently only one) that
+# need to install and run the 'power-cycle' utility.
+
+- name: Setup pip for installing python packages
+  hosts: remote_access
+  tasks:
+    - include: install-pip.yml
+
+- name: Setup git
+  hosts: remote_access
+  tasks:
+    - apt: name=git state=present
