@@ -5,6 +5,7 @@
 - hosts: aprx_hosts
   roles:
     # This playbook just does the configuration.  Run install-aprx.yml to install it.
+    - { role: share_tnc,  baud: 9600 }
     - aprx_config
 
 - hosts: power_controllers

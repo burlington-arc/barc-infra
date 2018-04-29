@@ -1,0 +1,11 @@
+
+[Unit]
+Description=Share serial-connected TNC to KISS-over-TCP
+
+[Service]
+ExecStart=/usr/local/bin/share-tnc {{serial_port}} {{tcp_port}} --baud={{baud}}
+Restart=always
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
