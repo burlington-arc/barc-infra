@@ -17,3 +17,8 @@
     - phone_home_gw
 
 - include: setup-ssh-users.yml
+
+- hosts: gateway
+  roles:
+    - gateway_sshd_config
+ 
