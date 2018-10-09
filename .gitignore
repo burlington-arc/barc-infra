@@ -1,1 +1,4 @@
 **/*.retry
+**/temp/*
+!**/temp
+!**/temp/README.md

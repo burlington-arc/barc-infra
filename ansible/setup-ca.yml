@@ -1,0 +1,57 @@
+
+---
+# Note:  This playbook is presently unused, as the certificates are being
+# generated manually using EasyRSA.
+
+# This playbook sets up the public key infrastructure required for the Openvpn
+# infrastructure.
+# This playbook is standalone, because we want it to be a conscious decision to
+# create a new CA cert.  We don't want it to happen just because someone
+# forgets to get the existing CA cert.
+
+# We need a Certificate Authority (CA).  This will be the hosts which are in the
+# group called 'CA'.  There can be many of them, and they can be located anywhere,
+# (i.e. more than one club member can maintain a CA)
+# but keep in mind that we need to place the actual CA certificate on the CA hosts.
+# So the CA hosts should be secure.  In addition, we'll keep the actual private key
+# for the CA outside of the playbook source folder.
+
+# To generate a cert for either the client or the server, we need to generate
+# a private key, then generate a self-signed certificate, and then have the CA
+# sign that self-signed certificate.
+
+# It's possible that different people may need to run playbooks that need to
+# generate certs or change configurations for the server and/or clients.
+# Just to avoid managing local copies of all the private keys (which would be a
+# bit of a security nightmare if done correctly!), we'll generate the keys on the
+# clients themselves.  Note that this implies that we have a separate secure
+# channel to the remote machines, which we do, with the ssh infrastructure.
+
+# This is where the private key and certificate for the CA will reside.
+#ca_cert_path= ~/.ca-certs
+
+- hosts:  ca_server
+  vars:
+    ca_cert_path: '~/.ca-certs'
+  tasks:
+    - stat: path="{{ ca_cert_path }}"
+      register: ca_cert_path_t
+    - fail:
+        msg: "Either create {{ ca_cert_path }} or override it with -e ca_cert_path=x"
+      when: ca_cert_path_t.stat.exists is not defined or ca_cert_path_t.stat.isdir is not defined
+    - easy_install: # We need pip to make sure we have pyopenssl
+        name: pip
+    - pip: # We'll need this to create the keys below.
+        name: pyopenssl
+    - openssl_privatekey:
+        path: "{{ca_cert_path}}/ca.pem"
+    - openssl_csr:
+        path: "{{ca_cert_path}}/ca.csr"
+        privatekey_path: "{{ca_cert_path}}/ca.pem"
+        common_name: gateway.barc.ca
+        organization_name: "Burlington Amateur Radio Club"
+    - openssl_certificate:
+        provider: selfsigned
+        path: "{{ca_cert_path}}/ca.crt"
+        privatekey_path: "{{ca_cert_path}}/ca.pem"
+        csr_path: "{{ca_cert_path}}/ca.csr"

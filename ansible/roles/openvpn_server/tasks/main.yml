@@ -1,0 +1,51 @@
+---
+# tasks file for openvpn_server
+
+# Shut down openvpn if its running
+
+# Allow IP Allow IP Forwarding
+- name: Allow IP forwarding (sysctl file)
+  lineinfile:
+    path: /etc/sysctl.conf
+    regexp: '^net.ipv4.ip_forward'
+    line: 'net.ipv4.ip_forward = 1'
+
+- name: Allow IP forwarding (Now)
+  shell: /sbin/sysctl -w net.ipv4.ip_forward=1
+
+# Install openvpn
+- name: install epel-release in preparation for openvpn
+  yum:
+    name: epel-release
+    state: present
+
+- name: install Openvpn
+  yum:
+    name: openvpn
+    state: present
+
+- name: Create openvpn server config.
+  template:
+    src: templates/server.conf.j2
+    dest: /etc/openvpn/server.conf
+
+# Create client config directory /etc/openvpn/ccd
+- name: Create client config directory
+  file:
+    path: /etc/openvpn/ccd
+    state: directory
+
+# Create a config file for each client.
+- name: Create the client setup files.
+  with_items: "{{ groups['openvpn_clients'] }}"
+  template:
+    src: templates/ccd_file.j2
+    dest: /etc/openvpn/ccd/{{item}}
+
+# Start the openvpn server
+- name: Start OpenVPN
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+    name: "openvpn@server"

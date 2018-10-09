@@ -76,6 +76,10 @@ the 'pi' user, as follows:
 
     cat ~/.ssh/id_rsa.pub | ssh pi@barcpi003 "cat >>~/.ssh/authorized_keys"  
 
+8. Copy the pi's public key into the authorized_keys folder in Ansible.
+
+    ssh pi@barcpi003 "cat ~/.ssh/id_rsa.pub" > authorized_keys/pi@barcpi003_rsa.pub
+
 8. Add the new host to the 'hosts' file and also add a 'host_vars' file for the
 new host.
 
@@ -93,3 +97,33 @@ new host.
 
 
 # Setting up the EC2 Gateway
+
+# Openvpn
+
+The BARC infrastructure uses openvpn to allow the remote systems to have a
+persistent presence on the open internet that is served through the gateway.barc.ca
+domain name.  For instance, the All-Star gateways etc, need a routable address
+to enable call-ins.  Also, the hope is that administrative connections like ssh may
+be more efficient using the openvpn protocol than tunneling ssh connections.
+There is also the possibility of having the remote machines use server
+infrastructure.  For instance, we could log metrics to a database on the EC2 network.
+
+On the openvpn infrastucture:
+
+- We use a routed configuration  
+- The subnet for connected openvpn nodes is 10.75.0.0/24 (apropos of nothing,
+  just to have no conflicts).  This allows for 255 remote nodes.  
+- The CA for openvpn resides on the gateway machine.  
+- The gateway.barc.ca node will have ip address 10.75.0.1.  
+- Any other
+- Machines at the actual remote sites are assigned fixed ip addresses in
+  the 10.75.0.0 subnet in the range 10.75.0.2 - 10.75.57.99  
+- Temporary clients connected for admin purposes will be assigned addresses from
+  the rest of the subnet.  
+- Each node and the gateway needs a private key and certificate, signed by the CA   
+    - The key is stored in the ansible_user's  ~/{{hostname}}.pem
+    - The certificate is signed by the ca and stored in ~/{{hostname}}.crt  
+- The gateway machine has a manually-installed instance of easy_rsa and the
+  keys and certs are generated and distributed to the client machines manually.
+
+  
