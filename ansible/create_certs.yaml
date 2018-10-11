@@ -1,0 +1,22 @@
+# Note that this is currently unused - for now we're generating certs by
+# hand and putting them into the 'certs' folder for the openvpn setup to put them
+# onto the machines.
+
+
+
+- hosts: hosts_with_certs
+  tasks:
+    # Create a key on the target
+    # Create a csr on the target
+    - name: Create a private key and csr
+      shell: openssl req -out {{inventory_hostname}}.csr -new -newkey rsa:2048 -nodes -keyout {{inventory_hostname}}.key -subj "/O=Burlington Amateur Radio Club/CN={{inventory_hostname}}"
+    # Bring the csr to the local machine
+    - name: Copy csrs to local machine.
+      fetch:
+        src:  "{{inventory_hostname}}.csr"
+        dest: temp
+
+# Copy the csr to the CA
+- hosts: localhost
+# Make the cert
+# Copy the cert back to the local machine

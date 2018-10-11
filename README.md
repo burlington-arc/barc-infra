@@ -67,3 +67,15 @@ component, which actually communicates with the repeater, decoding GMSK into bit
 then implementing the D-Star network protocol, and there is the ircddbgateway
 component, which routes audio and control signals from the repeater to other
 repeaters on the internet.
+
+## Virtual Private Network.
+
+For the VPN setup mentioned above, we use openvpn.  
+
+openvpn uses X.509 certificates to authenticate its clients.  So, we need to setup
+a certifying authority to create the certificates for all the openvpn components.
+
+The CA can be hosted anywhere; in our case we're hosting it at the gateway machine,
+so we don't have to move actual certs around if we need a new one, and there's no
+chance of the CA cert's private key being known, since it will never leave the
+gateway machine.  The 'setup-ca.yml' playbook sets up the certifying authority.

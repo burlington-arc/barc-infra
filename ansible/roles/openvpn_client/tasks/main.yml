@@ -1,0 +1,36 @@
+---
+# tasks file for openvpn_server
+
+# Shut down openvpn if its running
+
+# Install openvpn
+- name: install epel-release in preparation for openvpn
+  when: "ansible_os_family != 'Debian'"
+  yum:
+    name: epel-release
+    state: present
+
+- name: install Openvpn (CentOS)
+  when: "ansible_os_family != 'Debian'"
+  yum:
+    name: openvpn
+    state: present
+
+- name: install Openvpn (Debian)
+  when: "ansible_os_family == 'Debian'"
+  apt:
+    name: openvpn
+    state: present
+
+- name: Create openvpn client config.
+  template:
+    src: templates/client.conf.j2
+    dest: /etc/openvpn/client.conf
+
+# Start the openvpn server
+- name: Start OpenVPN
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+    name: "openvpn@client"

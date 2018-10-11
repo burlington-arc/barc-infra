@@ -1,0 +1,9 @@
+
+---
+
+- hosts: localhost
+  tasks:
+    - name: Say Hello
+      with_items: "{{groups['openvpn_clients']}}"
+      debug:
+        msg:  "{{item}} {{hostvars[item]['openvpn_ip_address']}}"

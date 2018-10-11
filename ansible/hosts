@@ -1,8 +1,9 @@
 
 # These are the machines at the repeater site.
 [repeater_site]
-compass
+#compass
 barcpi003
+barcpi005
 
 [aprx_hosts]
 barcpi003
@@ -17,9 +18,23 @@ ansible_become_user='root'
 
 # These machines are remotely accessible and require public keys in authorized_keys
 [remote_access]
-compass
+#compass
 stn2217
 barcpi003
+barcpi005
 
 [gateway]
 barc-gateway
+
+[ca_server]
+barc-gateway
+
+[hosts_with_certs]
+barc-gateway
+barcpi003
+barcpi005
+#compass
+
+[openvpn_clients]
+barcpi003 openvpn_ip_address=10.75.0.200
+barcpi004 openvpn_ip_address=10.75.0.201
