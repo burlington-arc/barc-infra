@@ -8,18 +8,4 @@
     - { role: share_tnc,  baud: 9600 }
     - aprx_config
 
-- hosts: power_controllers
-  tasks:
-    - name: Install the power cycle utility
-      pip:
-        name: 'git+http://github.com/burlington-arc/power-cycle.git#egg=power-cycle'
-        editable: false
-
-    - name: Add a crontab to restart the router once per day
-      cron:
-        name: power-cycle-router
-        hour: 0
-        minute: 10
-        job: '/usr/local/bin/power-cycle router 10 --comment "Nightly router restart"'
-
 - include: setup-ssh-users.yml

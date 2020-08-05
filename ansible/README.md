@@ -11,22 +11,21 @@ happen when the node is remotely accessible.
 ## Raspberry Pi nodes for Remote Sites
 
 Typically these will be setup initially on a local area network, and then
-maintained using remote access through one of the gateways, or "phone-home"
-servers.  As such, the initial entry in "~/.ssh/config" will look something
+maintained using remote access through the Ovpn.  
+As such, the initial entry in "~/.ssh/config" will look something
 like:
 
     # Access locally
-    Host barcpi003
+    Host barcpi004
     HostName 192.168.0.10
     user pi
 
 Then, when the node is installed remotely, and we want to go through the gateway,
-we comment out the above entry and put in something like:
+we conenct our local machine to the OVPN gateway and use the node's OVPN IP:
 
     # For remote access
-    Host barcpi003
-    HostName remote.stratuscom.com
-    Port 14439
+    Host barcpi004
+    HostName 10.75.0.201
     user pi
 
 If you're an authorized administrator for the BARC infrastructure, your public
@@ -83,9 +82,9 @@ the 'pi' user, as follows:
 8. Add the new host to the 'hosts' file and also add a 'host_vars' file for the
 new host.
 
-9. Setup the remote access and 'phone-home' service:
+9. Setup the OpenVPN client:
 
-    ansible-playbook -i hosts -l barcpi003 remote-access.yml
+    ansible-playbook -i hosts -l barcpi003 setup-openvpn.yml
 
 10. If the new node needs aprx, run the 'install-aprx' playbook.
 
@@ -125,5 +124,3 @@ On the openvpn infrastucture:
     - The certificate is signed by the ca and stored in ~/{{hostname}}.crt  
 - The gateway machine has a manually-installed instance of easy_rsa and the
   keys and certs are generated and distributed to the client machines manually.
-
-  

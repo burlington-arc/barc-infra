@@ -1,6 +1,0 @@
-phone_home_proxy_host:  remote.stratuscom.com
-phone_home_proxy_user:  dstarpi
-phone_home_2_proxy_user:  pi
-phone_home_2_proxy_port:  44203
-phone_home_proxy_port:  44203
-ansible_user: 'pi'
