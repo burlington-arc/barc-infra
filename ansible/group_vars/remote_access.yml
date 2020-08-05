@@ -1,6 +1,0 @@
-phone_home_proxy_host:  remote.stratuscom.com
-phone_home_2_proxy_host:  ve3ndq.ddns.net
-phone_home_gw_proxy_host: gateway.barc.ca
-# Note that the user is only specified globally for the gateway phone-home
-# The others have their phone-home user specified in host variables.
-phone_home_gw_proxy_user: centos
