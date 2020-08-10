@@ -1,0 +1,33 @@
+---
+# tasks file for rpi-nodejs
+
+- name: Download Nodejs distribution
+  get_url:
+    url: https://nodejs.org/dist/v12.18.3/node-v12.18.3-linux-armv7l.tar.xz
+    dest: /home/pi/node-v12.18.3-linux-armv7l.tar.xz
+
+# - name: Extract archive
+#   command: chdir=/home/pi /bin/tar xvf /opt/APRX-server-0.9.9.tar.gz -C /opt/creates=/opt/APRX-server-0.9.9
+
+- name: Make sure we have the local systemd directory
+  file:
+    path: /usr/local/lib/nodejs
+    state: directory
+    owner: root
+    group: root
+
+- name: Extract archive
+  become: True
+  unarchive:
+    src: /home/pi/node-v12.18.3-linux-armv7l.tar.xz
+    dest: /home/pi/
+    owner: root
+    group: root
+    remote_src: True
+
+- name: Copy node artifacts to /usr/local
+  shell: |
+    cp -r /home/pi/node-v12.18.3-linux-armv7l/bin /usr/local
+    cp -r /home/pi/node-v12.18.3-linux-armv7l/include /usr/local
+    cp -r /home/pi/node-v12.18.3-linux-armv7l/share /usr/local
+    cp -r /home/pi/node-v12.18.3-linux-armv7l/lib /usr/local

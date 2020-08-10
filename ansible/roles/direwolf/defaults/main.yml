@@ -1,0 +1,6 @@
+---
+# defaults file for direwolf
+
+direwolf_user: 'pi'
+direwolf_port: 8001
+direwolf_audio_device: "plughw:1,0"

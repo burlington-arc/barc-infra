@@ -6,6 +6,9 @@ barcpi004
 [aprx_hosts]
 barcpi004
 
+[direwolf_hosts]
+barcpi004
+
 # These machines are remotely accessible and require public keys in authorized_keys
 [remote_access]
 barcpi004

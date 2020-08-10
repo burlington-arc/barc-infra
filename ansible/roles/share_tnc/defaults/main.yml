@@ -4,4 +4,4 @@
 share_tnc_device:  /dev/ttyUSB0
 share_tnc_tcp_port: 8001
 share_tnc_baud: 2400
-share_tnc_user: {{ ansible_user }}
+share_tnc_user: "{{ ansible_user }}"
