@@ -3,4 +3,12 @@
 
 direwolf_user: 'pi'
 direwolf_port: 8001
+
+# These variables are for a usb sound card in the Raspberry Pi.
 direwolf_audio_device: "plughw:1,0"
+direwolf_amixer_card: 1
+
+# These values are determined experimentally during the calibration.
+# If needed, override in the host_vars for the node.
+direwolf_amixer_capture: 11
+direwolf_amixer_playback: 92

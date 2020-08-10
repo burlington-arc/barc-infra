@@ -66,5 +66,11 @@
 - name: Setup systemd service unit for direwolf
   template: src=direwolf.service.j2 dest=/usr/local/lib/systemd/system/direwolf.service
 
+- name: Set audio parameters
+  shell: |
+    amixer -c {{ direwolf_amixer_card }} sset Mic Capture {{ direwolf_amixer_capture }} Playback 0 unmuted
+    amixer -c {{ direwolf_amixer_card }} sset Speaker Playback {{ direwolf_amixer_playback }} unmuted
+    amixer -c {{ direwolf_amixer_card }} 'Auto Gain Control' Playback off
+    
 - name: Enable the direwolf service
   systemd: name=direwolf enabled=yes daemon_reload=yes
