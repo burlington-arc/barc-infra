@@ -28,14 +28,16 @@
 #   sudo: True
 
 - name: Download APRX sources
-  get_url: url=http://thelifeofkenneth.com/aprx/release/aprx-2.9.0.tar.gz dest=/home/pi/aprx-2.9.0.tar.gz
+  get_url:
+    url: http://thelifeofkenneth.com/aprx/release/aprx-2.9.0.tar.gz
+    dest: /home/pi/aprx-2.9.0.tar.gz
 
 # - name: Extract archive
 #   command: chdir=/home/pi /bin/tar xvf /opt/APRX-server-0.9.9.tar.gz -C /opt/creates=/opt/APRX-server-0.9.9
 
 - name: Extract archive
   unarchive:
-    src: http://thelifeofkenneth.com/aprx/release/aprx-2.9.0.tar.gz dest=/home/pi/aprx-2.9.0.tar.gz
+    src: /home/pi/aprx-2.9.0.tar.gz
     dest: /home/pi
     owner: pi
     group: pi

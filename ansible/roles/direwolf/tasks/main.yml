@@ -1,0 +1,76 @@
+---
+# tasks file for direwolf
+
+- name: Remove PulseAudio
+  become: true
+  apt:
+    update_cache: yes
+    name: 'pulseaudio'
+    state: absent
+
+- name: Install libasound2-dev
+  become: true
+  apt:
+    name: 'libasound2-dev'
+    state: present
+
+- name: Make sure we have git
+  become: true
+  apt:
+    name: git
+
+- name: Get DireWolf
+  git:
+    repo: https://github.com/wb2osz/direwolf.git
+    version: 1.5
+    dest: ~/direwolf
+
+- name: Make DireWolf
+  make:
+    chdir: ~/direwolf
+
+# - name: Install DireWolf
+#   become: true
+#   make:
+#     chdir: /home/pi/direwolf
+#     target: install
+
+- name: Make a Desktop dir to keep DireWolf happy
+  become: true
+  file:
+    path: /root/Desktop
+    state: directory
+
+- name: Install DireWolf RPi
+  become: true
+  make:
+    chdir: ~/direwolf
+    target: install-rpi
+
+- name: Install DireWolf RPi configuration
+  become: false
+  template:
+    src:  direwolf.conf.j2
+    dest: /home/{{direwolf_user}}/direwolf.conf
+    owner: "{{ direwolf_user }}"
+
+- name: Add direwolf user ({{ direwolf_user }}) to gpio group
+  user:
+    name: "{{ direwolf_user }}"
+    groups: gpio
+    append: yes
+
+- name: Make sure we have the local systemd directory
+  file: path=/usr/local/lib/systemd/system state=directory
+
+- name: Setup systemd service unit for direwolf
+  template: src=direwolf.service.j2 dest=/usr/local/lib/systemd/system/direwolf.service
+
+- name: Set audio parameters
+  shell: |
+    amixer -c {{ direwolf_amixer_card }} sset Mic Capture {{ direwolf_amixer_capture }} Playback 0 unmuted
+    amixer -c {{ direwolf_amixer_card }} sset Speaker Playback {{ direwolf_amixer_playback }} unmuted
+    amixer -c {{ direwolf_amixer_card }} 'Auto Gain Control' Playback off
+    
+- name: Enable the direwolf service
+  systemd: name=direwolf enabled=yes daemon_reload=yes

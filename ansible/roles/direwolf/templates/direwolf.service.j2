@@ -1,0 +1,13 @@
+
+[Unit]
+Description=Packet Soft Modem
+
+[Service]
+ExecStart=/usr/local/bin/direwolf -t 0 -q d -c /home/{{ direwolf_user }}/direwolf.conf -c /home/{{ direwolf_user }}/direwolf.conf
+Restart=always
+RestartSec=5
+Type=simple
+User={{ direwolf_user }}
+
+[Install]
+WantedBy=multi-user.target

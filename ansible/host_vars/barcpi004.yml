@@ -3,6 +3,12 @@ ansible_become: true
 ansible_become_method: 'sudo'
 ansible_become_user: 'root'
 
+direwolf_port: 9001
+
+share_tnc_device:  "localhost:9001"
+share_tnc_tcp_port: 8001
+share_tnc_baud: 2400
+
 aprs_objects:
   - id: repeater
     name: "444.825ON"

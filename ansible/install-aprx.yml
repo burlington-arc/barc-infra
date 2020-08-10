@@ -1,9 +1,14 @@
 
 ---
-# This playbook downloads, compiles and installs APRX
+# This playbook downloads, compiles and installs Direwolf and APRX
+
+- hosts: direwolf_hosts
+  roles:
+    - direwolf
 
 - hosts: aprx_hosts
   roles:
+    - rpi-nodejs
     - aprx
-    - share-tnc baud=9600
+    - share_tnc
     - aprx_config
