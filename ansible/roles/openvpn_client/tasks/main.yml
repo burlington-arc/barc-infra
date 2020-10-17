@@ -27,6 +27,19 @@
     src: templates/client.conf.j2
     dest: /etc/openvpn/client.conf
 
+- name: Copy server cert.
+  copy:
+    src: certs/ca.crt
+    dest: /etc/openvpn
+- name: Copy client key
+  copy:
+    src: certs/{{ inventory_hostname }}.key
+    dest: /etc/openvpn
+- name: Copy client cert.
+  copy:
+    src: certs/{{ inventory_hostname }}.crt
+    dest: /etc/openvpn
+
 # Start the openvpn server
 - name: Start OpenVPN
   systemd:
