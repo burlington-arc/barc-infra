@@ -9,16 +9,8 @@
 # the 'phone_home' line that corresponds to the gateway that you're currently
 # using.
 
-- hosts: remote_access
-  name: 'Setup phone_home service'
-  roles:
-#    - phone_home
-    - phone_home_2
-    - phone_home_gw
-
 - include: setup-ssh-users.yml
 
-- hosts: gateway
-  roles:
-    - gateway_sshd_config
-    - openvpn_server 
+# - hosts: gateway
+#   roles:
+#     - openvpn_server

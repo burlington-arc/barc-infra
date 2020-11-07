@@ -29,6 +29,21 @@
     src: templates/server.conf.j2
     dest: /etc/openvpn/server.conf
 
+- name: Copy server cert.
+  copy:
+    src: certs/ca.crt
+    dest: /etc/openvpn
+
+- name: Copy server key
+  copy:
+    src: certs/ca.key
+    dest: /etc/openvpn
+
+- name: Copy diffie-helman parameters
+  copy:
+    src: certs/dh.pem
+    dest: /etc/openvpn
+
 # Create client config directory /etc/openvpn/ccd
 - name: Create client config directory
   file:

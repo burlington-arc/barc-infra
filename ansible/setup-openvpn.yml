@@ -11,9 +11,8 @@
 
 - hosts: gateway
   roles:
-    - gateway_sshd_config
     - openvpn_server
 
 - hosts: openvpn_clients
   roles:
-    - openvpn_client 
+    - openvpn_client
