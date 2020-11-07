@@ -21,7 +21,7 @@ like:
     user pi
 
 Then, when the node is installed remotely, and we want to go through the gateway,
-we conenct our local machine to the OVPN gateway and use the node's OVPN IP:
+we connect our local machine to the OVPN gateway and use the node's OVPN IP:
 
     # For remote access
     Host barcpi004
@@ -77,22 +77,22 @@ the 'pi' user, as follows:
 
 8. Copy the pi's public key into the authorized_keys folder in Ansible.
 
-    ssh pi@barcpi003 "cat ~/.ssh/id_rsa.pub" > authorized_keys/pi@barcpi003_rsa.pub
+    ssh pi@barcpi004 "cat ~/.ssh/id_rsa.pub" > authorized_keys/pi@barcpi003_rsa.pub
 
 8. Add the new host to the 'hosts' file and also add a 'host_vars' file for the
 new host.
 
 9. Setup the OpenVPN client:
 
-    ansible-playbook -i hosts -l barcpi003 setup-openvpn.yml
+    ansible-playbook -i hosts -l barcpi004 setup-openvpn.yml
 
 10. If the new node needs aprx, run the 'install-aprx' playbook.
 
-    ansible-playbook -i hosts -l barcpi003 install-aprx.yml
+    ansible-playbook -i hosts -l barcpi004 install-aprx.yml
 
 11. Run the site playbook to configure the new node for the rest of the infrastructure.
 
-    ansible-playbook -i hosts -l barcpi003 site.yml
+    ansible-playbook -i hosts -l barcpi004 site.yml
 
 
 # Setting up the EC2 Gateway
