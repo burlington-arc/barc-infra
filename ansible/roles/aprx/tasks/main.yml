@@ -20,38 +20,47 @@
 #     - "@Fonts"
 
 # Use the 'pi' user for compiles - it's already there
-# - name: add group "pi"
-#   group: name=pi
-#
-# - name: add user "pi"
-#   user: name=pi group=pi home=/home/pi createhome=no
-#   sudo: True
+- name: add group "{{ aprx_group }}"
+  group: name={{ aprx_group }}
+  become: True
+  become_user:  root
+
+- name: add user "{{ aprx_user }}"
+  user: name={{ aprx_user }} group={{ aprx_group }} home=/home/{{ aprx_user }} createhome=yes
+  become: True
+  become_user:  root
 
 - name: Download APRX sources
   get_url:
     url: http://thelifeofkenneth.com/aprx/release/aprx-2.9.0.tar.gz
-    dest: /home/pi/aprx-2.9.0.tar.gz
+    dest: /home/{{ aprx_user}}/aprx-2.9.0.tar.gz
 
 # - name: Extract archive
 #   command: chdir=/home/pi /bin/tar xvf /opt/APRX-server-0.9.9.tar.gz -C /opt/creates=/opt/APRX-server-0.9.9
 
 - name: Extract archive
   unarchive:
-    src: /home/pi/aprx-2.9.0.tar.gz
-    dest: /home/pi
-    owner: pi
-    group: pi
+    src: /home/{{ aprx_user}}/aprx-2.9.0.tar.gz
+    dest: /home/{{ aprx_user }}
+    owner: "{{ aprx_user }}"
+    group: "{{ aprx_group }}"
     remote_src: True
 
 - name: Run the configure tool
-  shell: chdir=/home/pi/aprx-2.9.0 ./configure
-  become_user: pi
+  shell: ./configure
+  args:
+    chdir: "/home/{{ aprx_user }}/aprx-2.9.0"
+  become_user: "{{ aprx_user }}"
   become: true
 
 - name: Make APRX
-  shell: chdir=/home/pi/aprx-2.9.0 make
-  become_user: pi
+  shell: make
+  args:
+    chdir: "/home/{{ aprx_user}}/aprx-2.9.0"
+  become_user: "{{ aprx_user }}"
   become: true
 
 - name: Install APRX
-  shell: chdir=/home/pi/aprx-2.9.0 make install
+  shell: make install
+  args:
+    chdir: "/home/{{ aprx_user}}/aprx-2.9.0"

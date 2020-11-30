@@ -3,10 +3,10 @@
 # /etc/aprx.conf
 
 - name: Make sure we have the local systemd directory
-  file: path=/usr/local/lib/systemd/system state=directory
+  file: path={{ systemd_unit_dir}} state=directory
 
 - name: Setup systemd service unit for aprx
-  template: src=aprx.service dest=/usr/local/lib/systemd/system
+  template: src=aprx.service.jj2 dest={{ systemd_unit_dir }}/aprx.service
 
 - name: Create APRX log directory
   file:

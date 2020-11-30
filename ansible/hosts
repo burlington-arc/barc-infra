@@ -1,12 +1,22 @@
 
+[raspbian]
+barcpi004
+
+[ubuntu]
+barcvm001
+
 # These are the machines at the repeater site.
 [repeater_site]
 barcpi004
 
 [aprx_hosts]
 barcpi004
+barcvm001
 
 [direwolf_hosts]
+barcpi004
+
+[share_tnc_hosts]
 barcpi004
 
 # These machines are remotely accessible and require public keys in authorized_keys
