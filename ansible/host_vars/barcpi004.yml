@@ -2,7 +2,8 @@ ansible_user: 'pi'
 ansible_become: true
 ansible_become_method: 'sudo'
 ansible_become_user: 'root'
-
+aprx_user = pi
+aprx_group = pi
 direwolf_port: 9001
 
 share_tnc_device:  "localhost:9001"

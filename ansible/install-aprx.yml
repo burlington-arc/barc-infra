@@ -6,9 +6,11 @@
   roles:
     - direwolf
 
+- hosts: share_tnc_hosts
+    - rpi-nodejs
+    - share_tnc
+
 - hosts: aprx_hosts
   roles:
-    - rpi-nodejs
     - aprx
-    - share_tnc
     - aprx_config

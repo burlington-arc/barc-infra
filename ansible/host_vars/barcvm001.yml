@@ -1,0 +1,16 @@
+ansible_user: 'root'
+
+aprx_kiss_host: 'raspberrypi'
+aprx_kiss_port: 8001
+aprx_group: ubuntu
+aprx_user: aprx
+
+digipeater: False
+igate:  True
+
+mycall:  "VE3RSB-15"
+latitude: "4322.83N"
+longitude: "07948.60W"
+
+aprsis_passcode:  17847
+aprs_rf_beacon_message: "PHG5260 Rx Tx Igate in Burlington Ontario"
